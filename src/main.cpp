@@ -9,16 +9,16 @@ int main(int argc, char* argv[])
     std::cout << o.json() << std::endl;
 
     // Create design doc 'test' from json file
-    o = couch.put("test", "test", "test.json");
+    o = couch.put("test", "my_design", "test.json");
     std::cout << o.json() << std::endl;
     
     // Fetch design document called 'test'
-    o = couch.get("test", "test");
+    o = couch.get("test", "my_design");
     std::cout << o.json() << std::endl;
 
     // Delete a db
-    o = couch.del("test");
-    std::cout << o.json() << std::endl;
+    // o = couch.del("test");
+    // std::cout << o.json() << std::endl;
 
     return 0;
 }

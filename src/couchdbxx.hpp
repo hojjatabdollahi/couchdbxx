@@ -18,7 +18,7 @@ namespace wezside
         std::string uri;
         CurlRequest curlrequest;
 
-        jsonxx::Object request(std::string req, std::string req_method = "", std::string req_data = "")
+        jsonxx::Object request(std::string req, std::string req_method = "GET", std::string req_data = "")
         {
             jsonxx::Object o;
             std::ostringstream res;
