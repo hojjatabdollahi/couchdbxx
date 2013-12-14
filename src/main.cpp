@@ -17,8 +17,8 @@ int main(int argc, char* argv[])
     std::cout << o.json() << std::endl;
 
     // Delete a db
-    // o = couch.del("test");
-    // std::cout << o.json() << std::endl;
+    o = couch.del("test");
+    std::cout << o.json() << std::endl;
 
     return 0;
 }
