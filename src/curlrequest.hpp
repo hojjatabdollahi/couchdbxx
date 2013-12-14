@@ -37,11 +37,10 @@ namespace wezside
 		/**
 		 * timeout is in seconds
 		 **/
-		CURLcode curl_read(const std::string& url, std::ostream& os, long timeout = 30)
+		CURLcode curl_read(const std::string& url, std::ostream& os, long timeout = 30, std::string custom_req = "GET")
 		{
 			CURLcode code(CURLE_FAILED_INIT);
 			CURL* curl = curl_easy_init();
-
 			if(curl)
 			{
 				if(CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &data_write))
@@ -49,7 +48,8 @@ namespace wezside
 				&& CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L))
 				&& CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_FILE, &os))
 				&& CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_TIMEOUT, timeout))
-				&& CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_URL, url.c_str())))
+				&& CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_URL, url.c_str()))
+				&& CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, custom_req.c_str())))
 				{
 					code = curl_easy_perform(curl);
 				}
