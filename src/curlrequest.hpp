@@ -30,7 +30,6 @@ namespace wezside
                 if(os.write(static_cast<char*>(buf), len))
                     return len;
             }
-
             return 0;
         }
 

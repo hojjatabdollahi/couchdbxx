@@ -68,11 +68,17 @@ namespace wezside
         }
         jsonxx::Object view(std::string db_name, std::string design, std::string view)
         {
+            if (db_name.empty()) return jsonxx::Object("error", "Database name cannot be empty.");
+            if (uri.at(uri.length()-1) != '/') uri += '/';
+            return request(uri + db_name + "/_design/" + design + "/_view/" + view);
         }
-        jsonxx::Object view(std::string db_name, std::string design, std::string view, std::string params)
+        jsonxx::Object view(std::string db_name, std::string design, std::string view, jsonxx::Object params)
         {	
+            if (db_name.empty()) return jsonxx::Object("error", "Database name cannot be empty.");
+            if (uri.at(uri.length()-1) != '/') uri += '/';
+            return request(uri + db_name + "/_design/" + design + "/_view/" + view, params.json());
         }
-        jsonxx::Object one(std::string db_name, std::string doc_name)
+        jsonxx::Object doc(std::string db_name, std::string doc_name)
         {
             if (db_name.empty()) return jsonxx::Object("error", "Database name cannot be empty.");
             if (uri.at(uri.length()-1) != '/') uri += '/';
