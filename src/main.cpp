@@ -19,13 +19,21 @@ int main(int argc, char* argv[])
     std::cout << "----- Fetch design doc 'test' -----" << std::endl;
     std::cout << o.json() << std::endl;
 
+    // Add new doc
+    jsonxx::Object body;
+    body << "title" << "Hello world";
+    body << "timestamp" << static_cast<std::ostringstream*>( &(std::ostringstream() << time(NULL)))->str();
+    o = couch.put("test", body);
+    std::cout << "----- Insert new doc -----" << std::endl;
+    std::cout << o.json() << std::endl;	
+
     // View 
     o = couch.view("test", "my_design", "all");
     std::cout << "----- Fetch view doc 'all' -----" << std::endl;
     std::cout << o.json() << std::endl;	
 
     // View + Params
-    jsonxx::Object params = jsonxx::Object("key", "somevalue");
+    jsonxx::Object params = jsonxx::Object("key", "Hello World");
     o = couch.view("test", "my_design", "all", params);
     std::cout << "----- Fetch view doc 'all' + params -----" << std::endl;
     std::cout << o.json() << std::endl;	

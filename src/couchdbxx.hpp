@@ -44,6 +44,12 @@ namespace wezside
             if (uri.at(uri.length()-1) != '/') uri += '/';
             return request(uri + db_name, "PUT");
         }
+        jsonxx::Object put(std::string db_name, jsonxx::Object body)
+        {
+            if (db_name.empty()) return jsonxx::Object("error", "Database name cannot be empty.");
+            if (uri.at(uri.length()-1) != '/') uri += '/';
+            return request(uri + db_name, "POST", body.json());
+        }		
         jsonxx::Object put(std::string db_name, std::string design_name, std::string filename)
         {
             if (db_name.empty()) return jsonxx::Object("error", "Database name cannot be empty.");
@@ -76,7 +82,7 @@ namespace wezside
         {	
             if (db_name.empty()) return jsonxx::Object("error", "Database name cannot be empty.");
             if (uri.at(uri.length()-1) != '/') uri += '/';
-            return request(uri + db_name + "/_design/" + design + "/_view/" + view, params.json());
+            return request(uri + db_name + "/_design/" + design + "/_view/" + view, "GET", params.json());
         }
         jsonxx::Object doc(std::string db_name, std::string doc_name)
         {
