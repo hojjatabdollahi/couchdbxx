@@ -3,10 +3,6 @@
 
 #include <string>
 #include <curl/curl.h>
-#include <algorithm> 
-#include <functional> 
-#include <cctype>
-#include <locale>
 #include "jsonxx/jsonxx.h"
 #include "curlrequest.hpp"
 
