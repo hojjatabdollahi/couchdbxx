@@ -82,7 +82,7 @@ namespace wezside
         {	
             if (db_name.empty()) return jsonxx::Object("error", "Database name cannot be empty.");
             if (uri.at(uri.length()-1) != '/') uri += '/';
-            return request(uri + db_name + "/_design/" + design + "/_view/" + view, "GET", params.json());
+            return request(uri + db_name + "/_design/" + design + "/_view/" + view, "POST", params.json());
         }
         jsonxx::Object doc(std::string db_name, std::string doc_name)
         {

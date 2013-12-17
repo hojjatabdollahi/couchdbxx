@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
     std::cout << "----- Create Design Doc -----" << std::endl;
     std::cout << o.json() << std::endl;
     
-    // Fetch design document called 'test'
+    // Fetch design document called 'my_design'
     o = couch.get("test", "my_design");
     std::cout << "----- Fetch design doc 'test' -----" << std::endl;
     std::cout << o.json() << std::endl;
@@ -27,13 +27,24 @@ int main(int argc, char* argv[])
     std::cout << "----- Insert new doc -----" << std::endl;
     std::cout << o.json() << std::endl;	
 
+    // Add new doc
+    body.reset();
+    body << "title" << "Destination nowhere";
+    body << "timestamp" << static_cast<std::ostringstream*>( &(std::ostringstream() << time(NULL)))->str();
+    o = couch.put("test", body);
+    std::cout << "----- Insert new doc -----" << std::endl;
+    std::cout << o.json() << std::endl;		
+
     // View 
     o = couch.view("test", "my_design", "all");
     std::cout << "----- Fetch view doc 'all' -----" << std::endl;
     std::cout << o.json() << std::endl;	
 
     // View + Params
-    jsonxx::Object params = jsonxx::Object("key", "Hello World");
+    jsonxx::Array a;
+    a << "Destination nowhere";
+    jsonxx::Object params = jsonxx::Object("keys", a);
+    std::cout << params.json() << std::endl;	
     o = couch.view("test", "my_design", "all", params);
     std::cout << "----- Fetch view doc 'all' + params -----" << std::endl;
     std::cout << o.json() << std::endl;	
