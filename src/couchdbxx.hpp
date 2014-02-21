@@ -68,11 +68,12 @@ namespace wezside
             if (uri.at(uri.length()-1) != '/') uri += '/';
             return request(uri + db_name, "DELETE");	
         }
-        jsonxx::Object view(std::string db_name, std::string design, std::string view)
+        jsonxx::Object view(std::string db_name, std::string design, std::string view, std::string params = "")
         {
             if (db_name.empty()) return jsonxx::Object("error", "Database name cannot be empty.");
             if (uri.at(uri.length()-1) != '/') uri += '/';
-            return request(uri + db_name + "/_design/" + design + "/_view/" + view);
+            std::string p = params.empty() ? "" : + "?" + params;
+            return request(uri + db_name + "/_design/" + design + "/_view/" + view  + p);
         }
         jsonxx::Object view(std::string db_name, std::string design, std::string view, jsonxx::Object params)
         {	
