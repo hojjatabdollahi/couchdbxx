@@ -5,13 +5,13 @@
 VERSION = 0.1.0
 CC = g++
 CFLAGS  = -Wall 
-CPPFLAGS = -ggdb -I./src 
+CPPFLAGS = -ggdb -I./jsonxx -I./src 
 LDLIBS = -lcurl
 
 default: app
 
-app: src/jsonxx/jsonxx.o src/main.o
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o couchdb src/jsonxx/jsonxx.o src/main.o $(LDLIBS)
+app: jsonxx/jsonxx.o src/main.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o couchdb jsonxx/jsonxx.o src/main.o $(LDLIBS)
 
 clean: 
 	$(RM) count *.o src/*.o *~ *.gz couchdb-dist-$(VERSION) couchdb -r

@@ -3,7 +3,7 @@
 
 #include <string>
 #include <curl/curl.h>
-#include "jsonxx/jsonxx.h"
+#include "jsonxx.h"
 #include "curlrequest.hpp"
 
 namespace wezside
