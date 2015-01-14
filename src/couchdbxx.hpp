@@ -18,11 +18,15 @@ namespace wezside
         {
             jsonxx::Object o;
             std::ostringstream res;
-            if (CURLE_OK == curlrequest.curl_read(req, res, 30, req_method, req_data))
+            if (CURLE_OK == curlrequest.curl_read(req, res, 10, req_method, req_data))
             {
                 o.parse(res.str().c_str());
             }			
-            else o << "error" << "An error occured when CURL request was made.";
+            else
+            {
+                o << "error" << "An error occured when CURL request was made.";
+                o << "code" << 100;  
+            } 
             return o;
         }
 
@@ -33,6 +37,10 @@ namespace wezside
         void set_db(std::string uri)
         {
             this->uri = uri;
+        }
+        std::string get_db()
+        {
+            return this->uri;
         }
         jsonxx::Object put(std::string db_name)
         {
