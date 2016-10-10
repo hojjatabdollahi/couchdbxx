@@ -40,7 +40,9 @@ namespace wezside
                            std::ostream& os, 
                            long timeout = 30, 
                            std::string custom_req = "GET", 
-                           std::string data = "")
+                           std::string data = "",
+                           std::string ssl_cert_path = "",
+                           std::string ssl_cert_key_path = "")
         {
             CURLcode code(CURLE_FAILED_INIT);
             CURL* curl = curl_easy_init();
@@ -58,6 +60,14 @@ namespace wezside
                 && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_URL, url.c_str()))
                 && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers))
                 && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data.c_str()))
+                && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_VERBOSE, true))
+
+                // SSL Options
+                && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false))
+                && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false))
+                && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_SSLCERT, ssl_cert_path.c_str()))
+                && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_SSLKEY, ssl_cert_key_path.c_str()))
+
                 && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, custom_req.c_str())))
                 {
                     code = curl_easy_perform(curl);
@@ -70,3 +80,4 @@ namespace wezside
     };
 }
 #endif // __FILE_DOWNLOADER__
+#
