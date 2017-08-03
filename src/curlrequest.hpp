@@ -60,7 +60,7 @@ namespace wezside
                 && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_URL, url.c_str()))
                 && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers))
                 && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data.c_str()))
-                && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_VERBOSE, true))
+                && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_VERBOSE, false))
 
                 // SSL Options
                 && CURLE_OK == (code = curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false))
